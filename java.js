@@ -1,50 +1,82 @@
-function randomInt(max) {
-    return Math.floor(Math.random() * max)
-}
+let playerScore = 0;
+let computerScore = 0;
 
-let choice = randomInt(3);
+
+function game(){
+
+    function randomInt(max) {
+        return Math.floor(Math.random() * max)
+    }
     
-    function getComputerChoice() {
-    if (choice == 0) return "rock";
-    if (choice == 1) return "paper";
-    if (choice == 2) return "scissors";
-}
-
-let computerSelection = getComputerChoice();
-let playerSelection = prompt("Choose between rock, paper, or scissors.")
-let srtingPlayerSelection = String(playerSelection);
-let lowerPlayerSelection = String(playerSelection).toLowerCase();
-console.log(computerSelection);
-console.log(lowerPlayerSelection);
-
-function playRound(lowerPlayerSelection, computerSelection) {
+    let choice = randomInt(3);
+        
+        function getComputerChoice() {
+        if (choice == 0) return "rock";
+        if (choice == 1) return "paper";
+        if (choice == 2) return "scissors";
+    }
     
-    if (lowerPlayerSelection === "rock") {
-        if (computerSelection === "rock") {
-            console.log("Draw!");
-        }
-        else if(computerSelection === "paper") {
-            console.log("You Lose!");
+    let computerSelection = getComputerChoice();
+    let playerSelection = prompt("Choose between rock, paper, or scissors.")
+    let lowerPlayerSelection = String(playerSelection).toLowerCase();
+    console.log(computerSelection);
+    console.log(lowerPlayerSelection);
+
+    function playRound(lowerPlayerSelection, computerSelection) {
+
+        if (lowerPlayerSelection === "rock") {
+            if (computerSelection === "rock") {
+                return "Draw!";
+            }
+            else if(computerSelection === "paper") {
+                computerScore++ ;
+                return "You Lose!"
+            } else {
+                playerScore++ ;
+                return "You Win!";
+            }
+        } else if (lowerPlayerSelection === "paper") {
+            if (computerSelection === "rock") {
+                playerScore++ ;
+                return "You Win!";
+            } else if (computerSelection === "paper") {
+                return "Draw!";
+            } else {
+                computerScore++ ;
+                return "You Lose!";
+            }
         } else {
-            console.log("You Win!");
+            if (computerSelection === "rock") {
+                computerScore++ ;
+                return "You Lose!";
+            } else if (computerSelection === "paper") {
+                playerScore++ ;
+                return "You Win!";
+            } else {
+                return "Draw!"
+            }
         }
-    } else if (lowerPlayerSelection === "paper") {
-        if (computerSelection === "rock") {
-            console.log("You win!");
-        } else if (computerSelection === "paper") {
-            console.log("Draw!");
-        } else {
-            console.log("You lose!")
         }
-    } else {
-        if (computerSelection === "rock") {
-            console.log("You Lose!");
-        } else if (computerSelection === "paper") {
-            console.log("You Win!")
+
+        console.log(playRound(lowerPlayerSelection, computerSelection));
+    
+    function scoreKeeper() {
+        if(playerScore >= 5) {
+            return "You win the game!"
+        } else if(computerScore >= 5) {
+            return "The computer wins the game!"
         } else {
-            console.log("Draw!")
+            return "Next Round!"
         }
     }
+
+        console.log(playerScore);
+        console.log(computerScore);
+        console.log(scoreKeeper());
     }
 
-console.log(playRound(lowerPlayerSelection, computerSelection));
+game();
+game();
+game();
+game();
+game();
